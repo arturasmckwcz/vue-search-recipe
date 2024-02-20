@@ -22,15 +22,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { Meal } from "../store/types.ts";
 import ButtonYT from "./ButtonYT.vue";
+import { Meal } from "../store/types";
 
-const { meal, length } = defineProps<{ meal: Meal; length: number }>();
+const { meal } = defineProps({
+  meal: Object,
+}) as { meal: Meal };
 
-const truncated = computed(() => {
-  const fullText = meal.strMeal;
+const truncated = computed(() => getTruncated());
+function getTruncated() {
+  const fullText = meal.strMeal || "";
 
-  const maxLength = length || 19;
+  const maxLength = 19;
 
   if (fullText.length <= maxLength) {
     return null;
@@ -45,7 +48,5 @@ const truncated = computed(() => {
   }
 
   return truncatedText.trim() + "...";
-});
+}
 </script>
-
-<style scoped></style>
