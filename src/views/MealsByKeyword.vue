@@ -7,7 +7,7 @@
       placeholder="Search meals"
     />
   </div>
-  <MealsList :meals="data.meals" :loading="data.loading" />
+  <MealsList :meals="data.list" :loading="data.loading" />
 </template>
 
 <script setup lang="ts">

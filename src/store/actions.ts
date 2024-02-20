@@ -9,16 +9,22 @@ function searchMeals(
   value: string
 ) {
   const mapParamToBy = {
-    Keyword: { mutationPostfix: "Keyword", searchParam: "s" },
-    Letter: { mutationPostfix: "Letter", searchParam: "f" },
-    Ingredient: { mutationPostfix: "Ingredient", searchParam: "i" },
+    Keyword: { mutationPostfix: "Keyword", url: "search.php?s=" },
+    Letter: { mutationPostfix: "Letter", url: "search.php?f=" },
+    Ingredient: { mutationPostfix: "Ingredient", url: "filter.php?i=" },
   };
-  const by = param[0].toUpperCase() + param.slice(1);
+  const by = (param[0].toUpperCase() +
+    param.slice(1)) as keyof typeof mapParamToBy;
   if (!value) return;
   commit(`startSearchingBy${mapParamToBy[by].mutationPostfix}`);
+  console.debug("actions:searchMeals:param,value", param, value);
   axiosClient
-    .get(`search.php?${mapParamToBy[by].searchParam}=${value}`)
+    .get(`${mapParamToBy[by].url}${value}`)
     .then(({ data }) => {
+      console.debug(
+        "actions:searchMeals:commit",
+        `setSearchedBy${mapParamToBy[by].mutationPostfix}`
+      );
       commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
     })
     .catch(console.error)
@@ -32,14 +38,6 @@ export function searchMealsByKeyword(
   keyword: string
 ) {
   searchMeals(commit, "keyword", keyword);
-
-  // if (!keyword) return;
-  // commit("startSearchingByKeyword");
-  // axiosClient
-  //   .get(`search.php?s=${keyword}`)
-  //   .then(({ data }) => commit("setSearchedByKeyword", data.meals))
-  //   .catch(console.error)
-  //   .finally(() => commit("finishSearchingByKeyword"));
 }
 
 export function searchMealsByLetter(
@@ -47,28 +45,15 @@ export function searchMealsByLetter(
   letter: string
 ) {
   searchMeals(commit, "letter", letter);
-
-  // if (!letter) return;
-  // commit("startSearchingByLetter");
-  // console.debug("actions:searchMealsByLetter:letter", letter);
-  // axiosClient
-  //   .get(`search.php?f=${letter}`)
-  //   .then(({ data }) => commit("setSearchedByLetter", data.meals))
-  //   .catch(console.error)
-  //   .finally(() => commit("finishSearchingByLetter"));
 }
 
-export function searchMealsByIngredient(
-  { commit }: ActionContext<SearchedMeals, State>,
-  ingredient: string
-) {
-  searchMeals(commit, "ingredient", ingredient);
-
-  // if (!ingredient) return;
-  // commit("startSearchingByIngredient");
-  // axiosClient
-  //   .get(`search.php?i=${ingredient}`)
-  //   .then(({ data }) => commit("setSearchedByIngredient", data.meals))
-  //   .catch(console.error)
-  //   .finally(() => commit("finishSearchingByIngredient"));
+export function loadIngredients({
+  commit,
+}: ActionContext<SearchedMeals, State>) {
+  commit("startLoadingIngredients");
+  axiosClient
+    .get("list.php?i=list")
+    .then(({ data }) => commit("setIngredients", data.meals))
+    .catch(console.error)
+    .finally(() => commit("finishLoadingIngredients"));
 }

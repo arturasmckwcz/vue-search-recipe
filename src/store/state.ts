@@ -3,15 +3,19 @@ import { State } from "./types";
 const state: State = {
   mealsByKeyword: {
     loading: false,
-    meals: [],
+    list: [],
   },
   mealsByLetter: {
     loading: false,
-    meals: [],
+    list: [],
   },
   mealsByIngredient: {
     loading: false,
-    meals: [],
+    list: [],
+  },
+  ingredients: {
+    loading: false,
+    list: [],
   },
 };
 

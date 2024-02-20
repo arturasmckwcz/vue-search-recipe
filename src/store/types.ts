@@ -54,16 +54,27 @@ export interface Meal {
   strYoutube: string;
 }
 
+export interface Ingredient {
+  idIngredient: string;
+  strIngredient: string;
+  strDescription: string;
+  strType: string | null;
+}
 interface Loading {
   loading: boolean;
 }
 
 export interface SearchedMeals extends Loading {
-  meals: Meal[];
+  list: Meal[];
+}
+
+export interface Ingredients extends Loading {
+  list: Ingredient[];
 }
 
 export interface State {
   mealsByKeyword: SearchedMeals;
   mealsByLetter: SearchedMeals;
   mealsByIngredient: SearchedMeals;
+  ingredients: Ingredients;
 }
