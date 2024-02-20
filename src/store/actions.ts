@@ -17,14 +17,9 @@ function searchMeals(
     param.slice(1)) as keyof typeof mapParamToBy;
   if (!value) return;
   commit(`startSearchingBy${mapParamToBy[by].mutationPostfix}`);
-  console.debug("actions:searchMeals:param,value", param, value);
   axiosClient
     .get(`${mapParamToBy[by].url}${value}`)
     .then(({ data }) => {
-      console.debug(
-        "actions:searchMeals:commit",
-        `setSearchedBy${mapParamToBy[by].mutationPostfix}`
-      );
       commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
     })
     .catch(console.error)
