@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col shadow-lg rounded-lg p-3">
+  <div class="flex flex-col bg-white shadow-lg rounded-md p-3">
     <v-tooltip location="top" :text="meal.strMeal" :disabled="!truncated">
       <template v-slot:activator="{ props }">
         <span class="font-bold text-xl" v-bind="props">{{

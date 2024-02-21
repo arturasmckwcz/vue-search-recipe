@@ -8,6 +8,5 @@ html {
 }
 body,
 #app {
-  min-width: 100%;
-  min-height: 100%;
+  @apply min-w-full min-h-full bg-gray-100;
 }

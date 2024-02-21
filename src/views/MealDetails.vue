@@ -1,6 +1,9 @@
 <template>
   <div v-if="loading">LOADING...</div>
-  <div v-else-if="meal.idMeal" class="flex flex-col max-w-[64em] mx-auto p-16">
+  <div
+    v-else-if="meal.idMeal"
+    class="flex flex-col max-w-[64em] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
+  >
     <a :href="meal.strSource" target="_blanc">
       <h1
         class="inline text-4xl font-bold after:content-['🕸️'] after:text-xs after:align-text-top"

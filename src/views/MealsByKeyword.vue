@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8 flex flex-col">
+  <div class="px-8 mt-5 flex flex-col">
     <input
       class="shadow-md rounded"
       v-model="keyword"

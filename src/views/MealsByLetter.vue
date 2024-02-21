@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center gap-3 mt-2">
+  <div class="flex justify-center gap-3 mt-5 bg-white shadow-md">
     <router-link
       :to="{ name: 'byLetter', params: { letter } }"
       v-for="letter of letters"
