@@ -21,8 +21,23 @@ function searchMeals(
   axiosClient
     .get(`${mapParamToBy[by].url}${value}`)
     .then(({ data }) => {
-      console.debug("actions:searchMeals:data", data.meals);
-      commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
+      if (mapParamToBy[by].url.includes("filter.php")) {
+        const list = [];
+        for (const meal of data.meals) {
+          list.push(
+            axiosClient
+              .get(`lookup.php?i=${meal.idMeal}`)
+              .then(({ data }) => data.meals[0])
+              .catch(console.error)
+          );
+        }
+        Promise.all(list).then((list) => {
+          commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, list);
+          console.debug("actions:searchMeals:list", list);
+        });
+      } else {
+        commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
+      }
     })
     .catch(console.error)
     .finally(() => {
@@ -61,5 +76,7 @@ export function loadIngredients({
       commit("setIngredients", data.meals);
     })
     .catch(console.error)
-    .finally(() => commit("finishLoadingIngredients"));
+    .finally(() => {
+      commit("finishLoadingIngredients");
+    });
 }
