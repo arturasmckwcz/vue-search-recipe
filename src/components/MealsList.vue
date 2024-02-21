@@ -15,5 +15,5 @@
 import MealCard from "../components/MealCard.vue";
 import { SearchedMeals } from "../store/types";
 
-const data = defineProps<SearchedMeals>();
+const data = defineProps<Partial<SearchedMeals>>();
 </script>
