@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed, onMounted } from "vue";
+import { watch, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 import store from "../store";
