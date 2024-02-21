@@ -2,6 +2,7 @@ import { ActionContext } from "vuex";
 
 import axiosClient from "../axiosClient.ts";
 import { SearchedMeals, State } from "./types.ts";
+import store from "./index.ts";
 
 function searchMeals(
   commit: ActionContext<SearchedMeals, State>["commit"],
@@ -20,6 +21,7 @@ function searchMeals(
   axiosClient
     .get(`${mapParamToBy[by].url}${value}`)
     .then(({ data }) => {
+      console.debug("actions:searchMeals:data", data.meals);
       commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
     })
     .catch(console.error)
@@ -42,13 +44,22 @@ export function searchMealsByLetter(
   searchMeals(commit, "letter", letter);
 }
 
+export function searchMealsByIngredient(
+  { commit }: ActionContext<SearchedMeals, State>,
+  ingredient: string
+) {
+  searchMeals(commit, "ingredient", ingredient);
+}
+
 export function loadIngredients({
   commit,
 }: ActionContext<SearchedMeals, State>) {
   commit("startLoadingIngredients");
   axiosClient
     .get("list.php?i=list")
-    .then(({ data }) => commit("setIngredients", data.meals))
+    .then(({ data }) => {
+      commit("setIngredients", data.meals);
+    })
     .catch(console.error)
     .finally(() => commit("finishLoadingIngredients"));
 }
