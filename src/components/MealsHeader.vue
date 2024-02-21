@@ -1,11 +1,11 @@
 <template>
   <h1
-    class="my-5 py-3 bg-white shadow-md rounded-md text-3xl font-bold text-center"
+    class="my-5 py-3 bg-white shadow-md rounded-md text-3xl font-semibold italic text-center"
   >
     {{ title }}
     <span></span>
     {{ by }}
-    <span class="ml-1 font-semibold italic">{{ value }}</span>
+    <span class="ml-1 font-bold not-italic">{{ value }}</span>
   </h1>
 </template>
 
