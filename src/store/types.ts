@@ -54,10 +54,17 @@ export interface Meal {
   strYoutube: string;
 }
 
+export interface Area {
+  strArea: string;
+}
+
+export interface Category {
+  strCategory: string;
+}
 export interface Ingredient {
   idIngredient: string;
   strIngredient: string;
-  strDescription: string;
+  strDescription: string | null;
   strType: string | null;
 }
 interface Loading {
@@ -68,6 +75,13 @@ export interface SearchedMeals extends Loading {
   list: Meal[];
 }
 
+export interface Areas extends Loading {
+  list: Area[];
+}
+
+export interface Categories extends Loading {
+  list: Category[];
+}
 export interface Ingredients extends Loading {
   list: Ingredient[];
 }
@@ -75,6 +89,10 @@ export interface Ingredients extends Loading {
 export interface State {
   mealsByKeyword: SearchedMeals;
   mealsByLetter: SearchedMeals;
+  mealsByArea: SearchedMeals;
+  mealsByCategory: SearchedMeals;
   mealsByIngredient: SearchedMeals;
+  areas: Areas;
+  categories: Categories;
   ingredients: Ingredients;
 }

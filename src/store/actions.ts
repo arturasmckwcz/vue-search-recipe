@@ -2,7 +2,10 @@ import { ActionContext } from "vuex";
 
 import axiosClient from "../axiosClient.ts";
 import { SearchedMeals, State } from "./types.ts";
-import store from "./index.ts";
+
+function capitalize<T>(str: string) {
+  return (str[0].toUpperCase() + str.slice(1)) as keyof T;
+}
 
 function searchMeals(
   commit: ActionContext<SearchedMeals, State>["commit"],
@@ -12,10 +15,12 @@ function searchMeals(
   const mapParamToBy = {
     Keyword: { mutationPostfix: "Keyword", url: "search.php?s=" },
     Letter: { mutationPostfix: "Letter", url: "search.php?f=" },
+    Area: { mutationPostfix: "Area", url: "filter.php?a=" },
+    Category: { mutationPostfix: "Category", url: "filter.php?c=" },
     Ingredient: { mutationPostfix: "Ingredient", url: "filter.php?i=" },
   };
-  const by = (param[0].toUpperCase() +
-    param.slice(1)) as keyof typeof mapParamToBy;
+  const by = capitalize<typeof mapParamToBy>(param);
+
   if (!value) return;
   commit(`startSearchingBy${mapParamToBy[by].mutationPostfix}`);
   axiosClient
@@ -59,6 +64,20 @@ export function searchMealsByLetter(
   searchMeals(commit, "letter", letter);
 }
 
+export function searchMealsByArea(
+  { commit }: ActionContext<SearchedMeals, State>,
+  area: string
+) {
+  searchMeals(commit, "area", area);
+}
+
+export function searchMealsByCategory(
+  { commit }: ActionContext<SearchedMeals, State>,
+  category: string
+) {
+  searchMeals(commit, "category", category);
+}
+
 export function searchMealsByIngredient(
   { commit }: ActionContext<SearchedMeals, State>,
   ingredient: string
@@ -66,17 +85,41 @@ export function searchMealsByIngredient(
   searchMeals(commit, "ingredient", ingredient);
 }
 
-export function loadIngredients({
-  commit,
-}: ActionContext<SearchedMeals, State>) {
-  commit("startLoadingIngredients");
+function load(
+  commit: ActionContext<SearchedMeals, State>["commit"],
+  what: string
+) {
+  const mapParamToBy = {
+    Areas: { mutationPostfix: "Areas", url: "list.php?a=list" },
+    Categories: { mutationPostfix: "Categories", url: "list.php?c=list" },
+    Ingredients: { mutationPostfix: "Ingredients", url: "list.php?i=list" },
+  };
+  const by = capitalize<typeof mapParamToBy>(what);
+
+  commit(`startLoading${mapParamToBy[by].mutationPostfix}`);
   axiosClient
-    .get("list.php?i=list")
+    .get(mapParamToBy[by].url)
     .then(({ data }) => {
-      commit("setIngredients", data.meals);
+      commit(`set${mapParamToBy[by].mutationPostfix}`, data.meals);
     })
     .catch(console.error)
     .finally(() => {
-      commit("finishLoadingIngredients");
+      commit(`finishLoading${mapParamToBy[by].mutationPostfix}`);
     });
+}
+
+export function loadAreas({ commit }: ActionContext<SearchedMeals, State>) {
+  load(commit, "Areas");
+}
+
+export function loadCategories({
+  commit,
+}: ActionContext<SearchedMeals, State>) {
+  load(commit, "Categories");
+}
+
+export function loadIngredients({
+  commit,
+}: ActionContext<SearchedMeals, State>) {
+  load(commit, "Ingredients");
 }

@@ -1,21 +1,33 @@
 import { State } from "./types";
 
+const content = {
+  loading: false,
+  list: [],
+};
 const state: State = {
   mealsByKeyword: {
-    loading: false,
-    list: [],
+    ...content,
   },
   mealsByLetter: {
-    loading: false,
-    list: [],
+    ...content,
   },
-  mealsByIngredient: {
-    loading: false,
-    list: [],
+  areas: {
+    ...content,
+  },
+  mealsByArea: {
+    ...content,
+  },
+  categories: {
+    ...content,
+  },
+  mealsByCategory: {
+    ...content,
   },
   ingredients: {
-    loading: false,
-    list: [],
+    ...content,
+  },
+  mealsByIngredient: {
+    ...content,
   },
 };
 
