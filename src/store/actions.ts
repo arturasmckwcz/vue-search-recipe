@@ -2,10 +2,7 @@ import { ActionContext } from "vuex";
 
 import axiosClient from "../axiosClient.ts";
 import { SearchedMeals, State } from "./types.ts";
-
-function capitalize<T>(str: string) {
-  return (str[0].toUpperCase() + str.slice(1)) as keyof T;
-}
+import { capitalize } from "../utils";
 
 function searchMeals(
   commit: ActionContext<SearchedMeals, State>["commit"],
