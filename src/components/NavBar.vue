@@ -10,11 +10,6 @@
     </router-link>
     <div class="flex gap-5">
       <router-link
-        :to="{ name: 'byKeyword', params: { keyword: '' } }"
-        class="px-2 h-full transition-colors hover:text-blue-600"
-        >Search Meals</router-link
-      >
-      <router-link
         :to="{ name: 'byLetter' }"
         class="px-2 h-full transition-colors hover:text-blue-600"
         >Meals By Letter</router-link

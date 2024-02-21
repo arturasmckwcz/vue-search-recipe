@@ -14,14 +14,14 @@ const routes: RouteRecordRaw[] = [
     path: "/",
     component: DefaultLayout,
     children: [
+      // {
+      //   path: "/",
+      //   name: "home",
+      //   component: Home,
+      // },
       {
         path: "/",
         name: "home",
-        component: Home,
-      },
-      {
-        path: "/by-keyword/:keyword?",
-        name: "byKeyword",
         component: MealsByKeyword,
       },
       {
