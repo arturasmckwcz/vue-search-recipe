@@ -17,8 +17,8 @@
       >
         <router-link
           :to="{
-            name: 'byArea',
-            params: { area: area.strArea },
+            name: 'byACI',
+            params: { aci: 'area', payload: area.strArea },
           }"
         >
           <h3 class="text-xl font-bold hover:text-blue-600">

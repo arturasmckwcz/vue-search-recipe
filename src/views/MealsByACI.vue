@@ -1,6 +1,6 @@
 <template>
   <div v-if="data.list">
-    <Header by="Category" :value="(category as string)" />
+    <Header :by="capitalize(aci as string)" :value="(payload as string)" />
     <MealsList :list="data.list" :loading="data.loading" />
   </div>
 </template>
@@ -13,12 +13,18 @@ import store from "../store";
 import MealsList from "../components/MealsList.vue";
 import Header from "../components/MealsHeader.vue";
 import { SearchedMeals } from "../store/types";
+import { capitalize } from "../utils";
 
-const category = computed(() => useRoute().params.category);
+const route = useRoute();
+const aci = computed(() => route.params.aci);
+const payload = computed(() => route.params.payload);
 
-const data = computed<SearchedMeals>(() => store.state.mealsByCategory);
+const data = computed<SearchedMeals>(() => store.state.mealsByArea);
 
 onMounted(() => {
-  store.dispatch("searchMealsByCategory", category.value);
+  store.dispatch(
+    `searchMealsBy${capitalize(aci.value as string)}`,
+    payload.value
+  );
 });
 </script>

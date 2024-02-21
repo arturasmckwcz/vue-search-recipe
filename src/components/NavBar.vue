@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 bg-gray-100">
-    <div>
+    <div class="py-2">
       <a href="https://www.themealdb.com/" target="_blank">
         <img src="../assets/the-meal-db-logo-small.png" alt="meal-db-logo" />
       </a>

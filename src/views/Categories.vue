@@ -17,8 +17,8 @@
       >
         <router-link
           :to="{
-            name: 'byCategory',
-            params: { category: category.strCategory },
+            name: 'byACI',
+            params: { aci: 'category', payload: category.strCategory },
           }"
         >
           <h3 class="text-xl font-bold hover:text-blue-600">
