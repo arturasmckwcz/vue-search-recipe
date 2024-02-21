@@ -21,7 +21,9 @@
             params: { ingredient: ingredient.strIngredient },
           }"
         >
-          <h3 class="text-xl font-bold">{{ ingredient.strIngredient }}</h3>
+          <h3 class="text-xl font-bold hover:text-blue-600">
+            {{ ingredient.strIngredient }}
+          </h3>
           <p class="text-justify">{{ ingredient.strDescription }}</p>
         </router-link>
       </div>

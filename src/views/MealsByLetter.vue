@@ -1,6 +1,7 @@
 <template>
-  <div class="flex justify-center gap-3 mt-5 bg-white shadow-md">
+  <div class="flex justify-center gap-3 mt-5 py-2 bg-white shadow-md">
     <router-link
+      class="hover:text-blue-600 hover:font-bold"
       :to="{ name: 'byLetter', params: { letter } }"
       v-for="letter of letters"
       :key="letter"
@@ -8,7 +9,10 @@
       {{ letter }}
     </router-link>
   </div>
-  <MealsList v-if="letter" :list="data.list" :loading="data.loading" />
+  <div v-if="letter">
+    <Header by="Letter" :value="(letter as string)" />
+    <MealsList :list="data.list" :loading="data.loading" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -18,6 +22,7 @@ import { useRoute } from "vue-router";
 import store from "../store";
 import { SearchedMeals } from "../store/types.ts";
 import MealsList from "../components/MealsList.vue";
+import Header from "../components/MealsHeader.vue";
 const letters = "ABCDEFGHIJKLMNOPRQSTUVWXYZ".split("");
 
 const route = useRoute();

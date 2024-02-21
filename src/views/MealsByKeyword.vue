@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8 mt-5 flex flex-col">
+  <div class="px-8 my-5 flex flex-col">
     <input
       class="shadow-md rounded"
       v-model="keyword"
@@ -7,6 +7,7 @@
       placeholder="Search meals"
     />
   </div>
+  <Header v-if="showList" by="Keyword" :value="(keyword as string)" />
   <MealsList v-if="showList" :list="data.list" :loading="data.loading" />
 </template>
 
@@ -17,6 +18,7 @@ import { useRoute } from "vue-router";
 import store from "../store";
 import { SearchedMeals } from "../store/types";
 import MealsList from "../components/MealsList.vue";
+import Header from "../components/MealsHeader.vue";
 
 const route = useRoute();
 const keyword = ref("");
