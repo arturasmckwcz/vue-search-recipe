@@ -4,12 +4,11 @@
       :to="{ name: 'byLetter', params: { letter } }"
       v-for="letter of letters"
       :key="letter"
-      @click="searchMeals(letter)"
     >
       {{ letter }}
     </router-link>
   </div>
-  <MealsList :list="data.list" :loading="data.loading" />
+  <MealsList v-if="letter" :list="data.list" :loading="data.loading" />
 </template>
 
 <script setup lang="ts">
@@ -21,11 +20,10 @@ import { SearchedMeals } from "../store/types.ts";
 import MealsList from "../components/MealsList.vue";
 const letters = "ABCDEFGHIJKLMNOPRQSTUVWXYZ".split("");
 
-const letter = ref(useRoute().params.letter);
+const route = useRoute();
+watch(route, () => searchMeals(letter.value as string));
 
-// const route = useRoute();
-// watch(route, () => searchMeals(letter.value as string));
-
+const letter = computed(() => route.params.letter);
 const data = computed<SearchedMeals>(() => store.state.mealsByLetter);
 
 function searchMeals(letter: string) {
@@ -33,6 +31,6 @@ function searchMeals(letter: string) {
 }
 
 onMounted(() => {
-  searchMeals(letter.value as string);
+  if (letter.value) searchMeals(letter.value as string);
 });
 </script>

@@ -7,7 +7,7 @@
       placeholder="Search meals"
     />
   </div>
-  <MealsList :list="data.list" :loading="data.loading" />
+  <MealsList v-if="showList" :list="data.list" :loading="data.loading" />
 </template>
 
 <script setup lang="ts">
@@ -20,10 +20,12 @@ import MealsList from "../components/MealsList.vue";
 
 const route = useRoute();
 const keyword = ref("");
+const showList = ref(false);
 const data = computed<SearchedMeals>(() => store.state.mealsByKeyword);
 
 function searchMeals() {
   store.dispatch("searchMealsByKeyword", keyword.value);
+  showList.value = true;
 }
 
 onMounted(() => {
