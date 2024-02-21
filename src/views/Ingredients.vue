@@ -5,9 +5,14 @@
       v-if="data.list?.length"
       class="flex flex-col gap-5 mx-auto p-8 max-w-[65ch]"
     >
+      <v-text-field
+        variant="outlined"
+        v-model="keyword"
+        placeholder="Search ingredients"
+      />
       <div
-        class="rounded shadow-md"
-        v-for="ingredient of data.list"
+        class="rounded shadow-md p-4"
+        v-for="ingredient of filteredIngredients"
         :key="ingredient.idIngredient"
       >
         <router-link
@@ -26,11 +31,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { computed, ref, onMounted } from "vue";
 import store from "../store";
-import { Ingredients } from "../store/types";
+import { Ingredient, Ingredients } from "../store/types";
 
 const data = ref<Ingredients>(store.state.ingredients);
+const keyword = ref("");
+
+const filteredIngredients = computed<Ingredient[]>(() =>
+  data.value.list.filter(({ strIngredient }) =>
+    strIngredient.toLowerCase().includes(keyword.value.toLowerCase())
+  )
+);
 
 onMounted(() => {
   if (data.value.list.length === 0) store.dispatch("loadIngredients");
