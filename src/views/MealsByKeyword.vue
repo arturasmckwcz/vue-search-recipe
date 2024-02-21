@@ -1,7 +1,7 @@
 <template>
-  <div class="p-8">
-    <v-text-field
-      variant="outlined"
+  <div class="p-8 flex flex-col">
+    <input
+      class="shadow-md rounded"
       v-model="keyword"
       @change="searchMeals"
       placeholder="Search meals"

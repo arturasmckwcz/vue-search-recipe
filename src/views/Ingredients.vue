@@ -5,13 +5,13 @@
       v-if="data.list?.length"
       class="flex flex-col gap-5 mx-auto p-8 max-w-[65ch]"
     >
-      <v-text-field
-        variant="outlined"
+      <input
+        class="rounded shadow-md"
         v-model="keyword"
         placeholder="Search ingredients"
       />
       <div
-        class="rounded shadow-md p-4"
+        class="rounded bg-white shadow-md p-4"
         v-for="ingredient of filteredIngredients"
         :key="ingredient.idIngredient"
       >

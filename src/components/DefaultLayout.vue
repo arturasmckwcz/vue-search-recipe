@@ -1,6 +1,6 @@
 <template>
   <navbar />
-  <main><router-view /></main>
+  <main class="min-h-full"><router-view /></main>
 </template>
 
 <script setup>
