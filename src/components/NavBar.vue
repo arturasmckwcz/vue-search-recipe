@@ -1,7 +1,9 @@
 <template>
   <header class="sticky top-0 bg-gray-100">
     <div>
-      <img src="../assets/the-meal-db-logo-small.png" alt="meal-db-logo" />
+      <a href="https://www.themealdb.com/" target="_blank">
+        <img src="../assets/the-meal-db-logo-small.png" alt="meal-db-logo" />
+      </a>
     </div>
     <nav class="bg-white shadow-md h-16 flex justify-between items-center px-4">
       <router-link
