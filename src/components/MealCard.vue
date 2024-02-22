@@ -24,29 +24,14 @@ import { computed } from "vue";
 
 import ButtonYT from "./ButtonYT.vue";
 import { Meal } from "../store/types";
+import { getTruncated } from "../utils";
 
 const { meal } = defineProps({
   meal: Object,
 }) as { meal: Meal };
 
-const truncated = computed(() => getTruncated());
-function getTruncated() {
-  const fullText = meal.strMeal || "";
-
-  const maxLength = 19;
-
-  if (fullText.length <= maxLength) {
-    return null;
-  }
-
-  const words = fullText.split(" ");
-
-  let truncatedText = "";
-  for (const word of words) {
-    if ((truncatedText + word).length >= maxLength) break;
-    truncatedText += word + " ";
-  }
-
-  return truncatedText.trim() + "...";
-}
+const maxLength = 19;
+const truncated = computed(() =>
+  meal.strMeal.length > maxLength ? getTruncated(meal.strMeal, maxLength) : null
+);
 </script>
