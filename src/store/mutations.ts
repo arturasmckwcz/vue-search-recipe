@@ -1,4 +1,4 @@
-import { State, Meal, Ingredient, Area, Category, Mutations } from "./types";
+import { State, Meal, Ingredient, Area, Category } from "./types";
 
 function startSearchingByKeyword(state: State) {
   state.mealsByKeyword.loading = true;

@@ -1,11 +1,11 @@
 import { ActionContext } from "vuex";
 
 import axiosClient from "../axiosClient.ts";
-import { SearchedMeals, State } from "./types.ts";
+import { State } from "./types.ts";
 import { capitalize } from "../utils";
 
 function searchMeals(
-  commit: ActionContext<SearchedMeals, State>["commit"],
+  commit: ActionContext<State, State>["commit"],
   param: string,
   value: string
 ) {
@@ -47,44 +47,41 @@ function searchMeals(
 }
 
 function searchMealsByKeyword(
-  { commit }: ActionContext<SearchedMeals, State>,
+  { commit }: ActionContext<State, State>,
   keyword: string
 ) {
   searchMeals(commit, "keyword", keyword);
 }
 
 function searchMealsByLetter(
-  { commit }: ActionContext<SearchedMeals, State>,
+  { commit }: ActionContext<State, State>,
   letter: string
 ) {
   searchMeals(commit, "letter", letter);
 }
 
 function searchMealsByArea(
-  { commit }: ActionContext<SearchedMeals, State>,
+  { commit }: ActionContext<State, State>,
   area: string
 ) {
   searchMeals(commit, "area", area);
 }
 
 function searchMealsByCategory(
-  { commit }: ActionContext<SearchedMeals, State>,
+  { commit }: ActionContext<State, State>,
   category: string
 ) {
   searchMeals(commit, "category", category);
 }
 
 function searchMealsByIngredient(
-  { commit }: ActionContext<SearchedMeals, State>,
+  { commit }: ActionContext<State, State>,
   ingredient: string
 ) {
   searchMeals(commit, "ingredient", ingredient);
 }
-
-function load(
-  commit: ActionContext<SearchedMeals, State>["commit"],
-  what: string
-) {
+// TODO: re-type to what: ACIs
+function load(commit: ActionContext<State, State>["commit"], what: string) {
   const mapParamToBy = {
     Areas: { mutationPostfix: "Areas", url: "list.php?a=list" },
     Categories: { mutationPostfix: "Categories", url: "list.php?c=list" },
@@ -104,15 +101,15 @@ function load(
     });
 }
 
-function loadAreas({ commit }: ActionContext<SearchedMeals, State>) {
+function loadAreas({ commit }: ActionContext<State, State>) {
   load(commit, "Areas");
 }
 
-function loadCategories({ commit }: ActionContext<SearchedMeals, State>) {
+function loadCategories({ commit }: ActionContext<State, State>) {
   load(commit, "Categories");
 }
 
-function loadIngredients({ commit }: ActionContext<SearchedMeals, State>) {
+function loadIngredients({ commit }: ActionContext<State, State>) {
   load(commit, "Ingredients");
 }
 export default {

@@ -6,11 +6,11 @@ import state from "./state";
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
-import { Getters, State } from "./types";
+import { State } from "./types";
 
 export const key: InjectionKey<Store<State>> = Symbol();
 
-export const store = createStore<State, Getters>({
+export const store = createStore<State>({
   state,
   actions,
   mutations,
