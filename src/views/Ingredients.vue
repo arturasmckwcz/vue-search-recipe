@@ -18,7 +18,7 @@
         <router-link
           :to="{
             name: 'byACI',
-            params: { aci: 'area', payload: ingredient.strIngredient },
+            params: { aci: 'ingredient', payload: ingredient.strIngredient },
           }"
         >
           <h3 class="text-xl font-bold hover:text-blue-600">

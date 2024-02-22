@@ -12,14 +12,20 @@ import { useRoute } from "vue-router";
 import store from "../store";
 import MealsList from "../components/MealsList.vue";
 import Header from "../components/MealsHeader.vue";
-import { SearchedMeals } from "../store/types";
+import { SearchedMeals, State } from "../store/types";
 import { capitalize } from "../utils";
+const mealsBy = {
+  area: "mealsByArea",
+  category: "mealsByCategory",
+  ingredient: "mealsByIngredient",
+};
 
 const route = useRoute();
 const aci = computed(() => route.params.aci);
 const payload = computed(() => route.params.payload);
-
-const data = computed<SearchedMeals>(() => store.state.mealsByArea);
+const data = computed<SearchedMeals>(
+  () => store.state[mealsBy[aci.value]] as SearchedMeals
+);
 
 onMounted(() => {
   store.dispatch(
