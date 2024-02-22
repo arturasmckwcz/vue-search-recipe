@@ -25,7 +25,6 @@ function searchMeals(
     .then(({ data }) => {
       if (mapParamToBy[by].url.includes("filter.php")) {
         const list = [];
-        console.debug("actions:searchMeals:data", data);
         for (const meal of data.meals) {
           list.push(
             axiosClient
