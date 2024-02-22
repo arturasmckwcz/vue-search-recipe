@@ -10,7 +10,7 @@ import Categories from "../views/Categories.vue";
 import Ingredients from "../views/Ingredients.vue";
 import MealsByACI from "../views/MealsByACI.vue";
 
-const base = "/" + import.meta.env.VITE_FE_BASE_URL;
+const base = import.meta.env.VITE_FE_BASE || "main";
 const routes: RouteRecordRaw[] = [
   {
     path: base,
