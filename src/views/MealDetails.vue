@@ -2,7 +2,7 @@
   <div v-if="loading">LOADING...</div>
   <div
     v-else-if="meal"
-    class="flex flex-col max-w-[64em] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
+    class="flex flex-col max-w-[72ch] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
   >
     <a :href="meal.strSource" target="_blanc">
       <h1
@@ -33,7 +33,12 @@
       <span class="inline-block ml-5"
         ><ButtonYT :href="meal.strYoutube" size="xs" />
       </span>
-      <p class="text-justify">{{ meal.strInstructions }}</p>
+      <p
+        v-for="para of getParas(meal.strInstructions)"
+        class="mb-1 text-justify"
+      >
+        {{ para }}
+      </p>
     </div>
     <div class="grid grid-cols-2">
       <span class="text-right mr-2"><strong>Ingredients</strong></span>
@@ -61,6 +66,7 @@ import { useStore } from "../store";
 import ButtonYT from "../components/ButtonYT.vue";
 import axiosClient from "../axiosClient";
 import { Meal } from "../store/types";
+import { getParas } from "../utils";
 
 const id = useRoute().params.id as string;
 const store = useStore();

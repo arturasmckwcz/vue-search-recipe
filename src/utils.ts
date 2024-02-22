@@ -14,3 +14,7 @@ export function getTruncated(fullText: string, maxLength: number) {
 
   return truncatedText.trim() + "...";
 }
+
+export function getParas(text: string, cr = "\r\n") {
+  return text.split(cr);
+}
