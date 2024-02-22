@@ -10,7 +10,7 @@ import Categories from "../views/Categories.vue";
 import Ingredients from "../views/Ingredients.vue";
 import MealsByACI from "../views/MealsByACI.vue";
 
-const base = import.meta.env.VITE_FE_BASE || "main";
+const base = import.meta.env.VITE_FE_BASE || "/";
 const routes: RouteRecordRaw[] = [
   {
     path: base,
@@ -22,17 +22,17 @@ const routes: RouteRecordRaw[] = [
         component: MealsByKeyword,
       },
       {
-        path: base + "/meal/:id?",
+        path: base + "meal/:id?",
         name: "mealDetails",
         component: MealDetails,
       },
       {
-        path: base + "/areas",
+        path: base + "areas",
         name: "areas",
         component: Areas,
       },
       {
-        path: base + "/categories",
+        path: base + "categories",
         name: "categories",
         component: Categories,
       },
@@ -42,18 +42,18 @@ const routes: RouteRecordRaw[] = [
         component: Ingredients,
       },
       {
-        path: base + "/by-aci/:aci/:payload",
+        path: base + "by-aci/:aci/:payload",
         name: "byACI",
         component: MealsByACI,
       },
       {
-        path: base + "/by-letter/:letter?",
+        path: base + "by-letter/:letter?",
         name: "byLetter",
         component: MealsByLetter,
       },
     ],
   },
-  { path: "/guest", component: GuestLayout },
+  { path: base + "guest", component: GuestLayout },
 ];
 
 const router = createRouter({
