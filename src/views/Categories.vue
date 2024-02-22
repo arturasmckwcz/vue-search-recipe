@@ -33,9 +33,10 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted } from "vue";
-import store from "../store";
+import { useStore } from "../store";
 import { Categories, Category } from "../store/types";
 
+const store = useStore();
 const data = ref<Categories>(store.state.categories);
 const keyword = ref("");
 

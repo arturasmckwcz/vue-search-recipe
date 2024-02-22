@@ -19,7 +19,7 @@
 import { watch, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import store from "../store";
+import { useStore } from "../store";
 import { SearchedMeals } from "../store/types.ts";
 import MealsList from "../components/MealsList.vue";
 import Header from "../components/MealsHeader.vue";
@@ -29,6 +29,7 @@ const route = useRoute();
 watch(route, () => searchMeals(letter.value as string));
 
 const letter = computed(() => route.params.letter);
+const store = useStore();
 const data = computed<SearchedMeals>(() => store.state.mealsByLetter);
 
 function searchMeals(letter: string) {

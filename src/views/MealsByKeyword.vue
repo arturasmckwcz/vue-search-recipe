@@ -15,7 +15,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import store from "../store";
+import { useStore } from "../store";
 import { SearchedMeals } from "../store/types";
 import MealsList from "../components/MealsList.vue";
 import Header from "../components/MealsHeader.vue";
@@ -23,6 +23,7 @@ import Header from "../components/MealsHeader.vue";
 const route = useRoute();
 const keyword = ref("");
 const showList = ref(false);
+const store = useStore();
 const data = computed<SearchedMeals>(() => store.state.mealsByKeyword);
 
 function searchMeals() {
