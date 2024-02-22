@@ -9,22 +9,18 @@
 import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
-import store from "../store";
+import { useStore } from "../store";
 import MealsList from "../components/MealsList.vue";
 import Header from "../components/MealsHeader.vue";
-import { SearchedMeals, State } from "../store/types";
+import { ACIs, SearchedMeals } from "../store/types";
 import { capitalize } from "../utils";
-const mealsBy = {
-  area: "mealsByArea",
-  category: "mealsByCategory",
-  ingredient: "mealsByIngredient",
-};
 
 const route = useRoute();
-const aci = computed(() => route.params.aci);
+const aci = computed<ACIs>(() => route.params.aci as ACIs);
 const payload = computed(() => route.params.payload);
+const store = useStore();
 const data = computed<SearchedMeals>(
-  () => store.state[mealsBy[aci.value]] as SearchedMeals
+  () => store.getters.getMealsByACI(aci.value) as SearchedMeals
 );
 
 onMounted(() => {
