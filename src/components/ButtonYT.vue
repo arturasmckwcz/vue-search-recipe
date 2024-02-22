@@ -1,6 +1,6 @@
 <template>
   <a :class="aClass" :href="href ? href : urlYT" target="_blanc">
-    <slot></slot>
+    <slot>YouTube</slot>
     <img
       class="inline-block"
       :width="imgWidth"

@@ -31,8 +31,8 @@
     <div>
       <span class="inline-block text-lg"><strong>Instructions</strong></span>
       <span class="inline-block ml-5"
-        ><ButtonYT :href="meal.strYoutube" size="xs">Watch</ButtonYT></span
-      >
+        ><ButtonYT :href="meal.strYoutube" size="xs" />
+      </span>
       <p class="text-justify">{{ meal.strInstructions }}</p>
     </div>
     <div class="grid grid-cols-2">
