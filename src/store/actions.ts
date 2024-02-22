@@ -16,7 +16,7 @@ function searchMeals(
     Category: { mutationPostfix: "Category", url: "filter.php?c=" },
     Ingredient: { mutationPostfix: "Ingredient", url: "filter.php?i=" },
   };
-  const by = capitalize<typeof mapParamToBy>(param);
+  const by = capitalize<keyof typeof mapParamToBy>(param);
 
   if (!value) return;
   commit(`startSearchingBy${mapParamToBy[by].mutationPostfix}`);
@@ -25,6 +25,7 @@ function searchMeals(
     .then(({ data }) => {
       if (mapParamToBy[by].url.includes("filter.php")) {
         const list = [];
+        console.debug("actions:searchMeals:data", data);
         for (const meal of data.meals) {
           list.push(
             axiosClient
@@ -35,7 +36,6 @@ function searchMeals(
         }
         Promise.all(list).then((list) => {
           commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, list);
-          console.debug("actions:searchMeals:list", list);
         });
       } else {
         commit(`setSearchedBy${mapParamToBy[by].mutationPostfix}`, data.meals);
