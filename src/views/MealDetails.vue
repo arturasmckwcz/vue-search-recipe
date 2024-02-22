@@ -1,7 +1,7 @@
 <template>
   <div v-if="loading">LOADING...</div>
   <div
-    v-else-if="meal.idMeal"
+    v-else-if="meal"
     class="flex flex-col max-w-[64em] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
   >
     <a :href="meal.strSource" target="_blanc">
@@ -29,23 +29,23 @@
       </span>
     </div>
     <div>
-      <span class="inline-block text-lg"><strong>Instuctions</strong></span>
+      <span class="inline-block text-lg"><strong>Instructions</strong></span>
       <span class="inline-block ml-5"
         ><ButtonYT :href="meal.strYoutube" size="xs">Watch</ButtonYT></span
       >
       <p class="text-justify">{{ meal.strInstructions }}</p>
     </div>
     <div class="grid grid-cols-2">
-      <span class="text-right mr-2"><strong>Ingedients</strong></span>
+      <span class="text-right mr-2"><strong>Ingredients</strong></span>
       <span class=""><strong>Measures</strong></span>
       <span class="text-right mr-2">
         <div v-for="(_, i) of new Array(20)">
-          {{ meal[`strIngredient${i + 1}`] }}
+          {{ meal[`strIngredient${i + 1}` as keyof Meal] }}
         </div>
       </span>
       <span class="">
         <div v-for="(_, i) of new Array(20)">
-          {{ meal[`strMeasure${i + 1}`] }}
+          {{ meal[`strMeasure${i + 1}` as keyof Meal] }}
         </div>
       </span>
     </div>
@@ -57,24 +57,25 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 
-import store from "../store";
+import { useStore } from "../store";
 import ButtonYT from "../components/ButtonYT.vue";
 import axiosClient from "../axiosClient";
 import { Meal } from "../store/types";
 
 const id = useRoute().params.id as string;
-console.debug("MealDetails:id", id);
+const store = useStore();
 
-const meal = ref<Meal>(store.getters.getMealById(id));
+const meal = ref<Meal | undefined>(store.getters.getMealById(id));
 const loading = ref(false);
 
 onMounted(() => {
-  console.debug("MealDetails:onMounted:meal", meal.value);
-  if (!Object.keys(meal.value).length) {
+  console.debug("MealDetails:onMounted:id,meal", id, meal.value);
+  if (!meal.value) {
     loading.value = true;
     axiosClient
       .get(`lookup.php?i=${id}`)
       .then(({ data }) => {
+        console.debug("MealDetails:onMounted:data", data);
         meal.value = data.meals[0];
       })
       .catch(console.error)
