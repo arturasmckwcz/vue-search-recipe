@@ -1,6 +1,6 @@
-import { Meal, State } from "./types";
+import { Getters, Meal, State } from "./types";
 
-export default {
+const getters: Getters = {
   getMealById:
     (state: State) =>
     (id: string): Meal | undefined => {
@@ -12,6 +12,7 @@ export default {
         console.debug("getters:getMealById:id,idMeal", id, idMeal);
         return idMeal === id;
       });
-      return meal || ({} as Meal);
+      return meal;
     },
 };
+export default getters;

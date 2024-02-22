@@ -6,7 +6,7 @@ import * as directives from "vuetify/directives";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import { store, key } from "./store";
 import "./style.css";
 
 const vuetify = createVuetify({
@@ -21,4 +21,4 @@ console.debug = function (desc, ...args) {
   console.groupEnd();
 };
 
-createApp(App).use(router).use(store).use(vuetify).mount("#app");
+createApp(App).use(router).use(store, key).use(vuetify).mount("#app");

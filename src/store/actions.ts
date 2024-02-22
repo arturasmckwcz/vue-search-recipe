@@ -46,35 +46,35 @@ function searchMeals(
     });
 }
 
-export function searchMealsByKeyword(
+function searchMealsByKeyword(
   { commit }: ActionContext<SearchedMeals, State>,
   keyword: string
 ) {
   searchMeals(commit, "keyword", keyword);
 }
 
-export function searchMealsByLetter(
+function searchMealsByLetter(
   { commit }: ActionContext<SearchedMeals, State>,
   letter: string
 ) {
   searchMeals(commit, "letter", letter);
 }
 
-export function searchMealsByArea(
+function searchMealsByArea(
   { commit }: ActionContext<SearchedMeals, State>,
   area: string
 ) {
   searchMeals(commit, "area", area);
 }
 
-export function searchMealsByCategory(
+function searchMealsByCategory(
   { commit }: ActionContext<SearchedMeals, State>,
   category: string
 ) {
   searchMeals(commit, "category", category);
 }
 
-export function searchMealsByIngredient(
+function searchMealsByIngredient(
   { commit }: ActionContext<SearchedMeals, State>,
   ingredient: string
 ) {
@@ -90,7 +90,7 @@ function load(
     Categories: { mutationPostfix: "Categories", url: "list.php?c=list" },
     Ingredients: { mutationPostfix: "Ingredients", url: "list.php?i=list" },
   };
-  const by = capitalize<typeof mapParamToBy>(what);
+  const by = capitalize<keyof typeof mapParamToBy>(what);
 
   commit(`startLoading${mapParamToBy[by].mutationPostfix}`);
   axiosClient
@@ -104,18 +104,24 @@ function load(
     });
 }
 
-export function loadAreas({ commit }: ActionContext<SearchedMeals, State>) {
+function loadAreas({ commit }: ActionContext<SearchedMeals, State>) {
   load(commit, "Areas");
 }
 
-export function loadCategories({
-  commit,
-}: ActionContext<SearchedMeals, State>) {
+function loadCategories({ commit }: ActionContext<SearchedMeals, State>) {
   load(commit, "Categories");
 }
 
-export function loadIngredients({
-  commit,
-}: ActionContext<SearchedMeals, State>) {
+function loadIngredients({ commit }: ActionContext<SearchedMeals, State>) {
   load(commit, "Ingredients");
 }
+export default {
+  searchMealsByKeyword,
+  searchMealsByLetter,
+  searchMealsByArea,
+  searchMealsByCategory,
+  searchMealsByIngredient,
+  loadAreas,
+  loadCategories,
+  loadIngredients,
+};

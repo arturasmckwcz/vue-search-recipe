@@ -1,3 +1,5 @@
+import { ActionContext } from "vuex/types/index.js";
+
 export interface Meal {
   dateModified: Date | null;
   idMeal: string;
@@ -95,4 +97,61 @@ export interface State {
   areas: Areas;
   categories: Categories;
   ingredients: Ingredients;
+}
+
+export interface Mutations {
+  startSearchingByKeyword: (state: State) => void;
+  finishSearchingByKeyword: (state: State) => void;
+  setSearchedByKeyword: (state: State, list: Meal[]) => void;
+  startSearchingByLetter: (state: State) => void;
+  finishSearchingByLetter: (state: State) => void;
+  setSearchedByLetter: (state: State, list: Meal[]) => void;
+  startSearchingByArea: (state: State) => void;
+  finishSearchingByArea: (state: State) => void;
+  setSearchedByArea: (state: State, list: Meal[]) => void;
+  startLoadingAreas: (state: State) => void;
+  finishLoadingAreas: (state: State) => void;
+  setAreas: (state: State, list: Area[]) => void;
+  startLoadingCategories: (state: State) => void;
+  finishLoadingCategories: (state: State) => void;
+  setCategories: (state: State, list: Category[]) => void;
+  startSearchingByCategory: (state: State) => void;
+  finishSearchingByCategory: (state: State) => void;
+  setSearchedByCategory: (state: State, list: Meal[]) => void;
+  startLoadingIngredients: (state: State) => void;
+  finishLoadingIngredients: (state: State) => void;
+  setIngredients: (state: State, list: Ingredient[]) => void;
+  startSearchingByIngredient: (state: State) => void;
+  finishSearchingByIngredient: (state: State) => void;
+  setSearchedByIngredient: (state: State, list: Meal[]) => void;
+}
+
+export interface Actions {
+  searchMealsByKeyword: (
+    { commit }: ActionContext<SearchedMeals, State>,
+    keyword: string
+  ) => void;
+  searchMealsByLetter: (
+    { commit }: ActionContext<SearchedMeals, State>,
+    letter: string
+  ) => void;
+  searchMealsByArea: (
+    { commit }: ActionContext<SearchedMeals, State>,
+    area: string
+  ) => void;
+  searchMealsByCategory: (
+    { commit }: ActionContext<SearchedMeals, State>,
+    category: string
+  ) => void;
+  searchMealsByIngredient: (
+    { commit }: ActionContext<SearchedMeals, State>,
+    ingredient: string
+  ) => void;
+  loadAreas: ({ commit }: ActionContext<SearchedMeals, State>) => void;
+  loadCategories: ({ commit }: ActionContext<SearchedMeals, State>) => void;
+  loadIngredients: ({ commit }: ActionContext<SearchedMeals, State>) => void;
+}
+
+export interface Getters {
+  getMealById: (state: State) => (id: string) => Meal | undefined;
 }

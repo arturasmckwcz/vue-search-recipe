@@ -1,17 +1,24 @@
-import { createStore } from "vuex";
+import { createStore, useStore as vuexUseStore } from "vuex";
+import { InjectionKey } from "vue";
 import { Store } from "vuex/types/index.js";
 
 import state from "./state";
-import * as actions from "./actions";
-import * as mutations from "./mutations";
+import actions from "./actions";
+import mutations from "./mutations";
 import getters from "./getters";
-import { State } from "./types";
+import { Getters, State } from "./types";
 
-const store: Store<State> = createStore({
+export const key: InjectionKey<Store<State>> = Symbol();
+
+export const store = createStore<State, Getters>({
   state,
   actions,
   mutations,
   getters,
 });
+
+export function useStore(): Store<State> {
+  return vuexUseStore(key);
+}
 
 export default store;
