@@ -10,43 +10,44 @@ import Categories from "../views/Categories.vue";
 import Ingredients from "../views/Ingredients.vue";
 import MealsByACI from "../views/MealsByACI.vue";
 
+const base = "/" + import.meta.env.VITE_FE_BASE_URL;
 const routes: RouteRecordRaw[] = [
   {
-    path: "/",
+    path: base,
     component: DefaultLayout,
     children: [
       {
-        path: "/",
+        path: base,
         name: "home",
         component: MealsByKeyword,
       },
       {
-        path: "/meal/:id?",
+        path: base + "/meal/:id?",
         name: "mealDetails",
         component: MealDetails,
       },
       {
-        path: "/areas",
+        path: base + "/areas",
         name: "areas",
         component: Areas,
       },
       {
-        path: "/categories",
+        path: base + "/categories",
         name: "categories",
         component: Categories,
       },
       {
-        path: "/ingredients",
+        path: base + "base+/ingredients",
         name: "ingredients",
         component: Ingredients,
       },
       {
-        path: "/by-aci/:aci/:payload",
+        path: base + "/by-aci/:aci/:payload",
         name: "byACI",
         component: MealsByACI,
       },
       {
-        path: "/by-letter/:letter?",
+        path: base + "/by-letter/:letter?",
         name: "byLetter",
         component: MealsByLetter,
       },
