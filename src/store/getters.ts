@@ -15,7 +15,6 @@ const getters = {
         ...state.mealsByLetter.list,
         ...state.mealsByIngredient.list,
       ].find(({ idMeal }) => {
-        console.debug("getters:getMealById:id,idMeal", id, idMeal);
         return idMeal === id;
       });
       return meal;

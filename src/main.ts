@@ -15,10 +15,4 @@ const vuetify = createVuetify({
   theme: {},
 });
 
-console.debug = function (desc, ...args) {
-  console.group(`DEBUG:${desc}:`);
-  args.forEach((arg) => console.log(typeof arg, arg));
-  console.groupEnd();
-};
-
 createApp(App).use(router).use(store, key).use(vuetify).mount("#app");

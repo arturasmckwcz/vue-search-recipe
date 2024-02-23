@@ -75,13 +75,11 @@ const meal = ref<Meal | undefined>(store.getters.getMealById(id));
 const loading = ref(false);
 
 onMounted(() => {
-  console.debug("MealDetails:onMounted:id,meal", id, meal.value);
   if (!meal.value) {
     loading.value = true;
     axiosClient
       .get(`lookup.php?i=${id}`)
       .then(({ data }) => {
-        console.debug("MealDetails:onMounted:data", data);
         meal.value = data.meals[0];
       })
       .catch(console.error)
