@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading">LOADING...</div>
+  <Loading v-if="loading">MEAL DETAILS</Loading>
   <div
     v-else-if="meal"
     class="flex flex-col max-w-[72ch] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
@@ -55,7 +55,7 @@
       </span>
     </div>
   </div>
-  <div v-else>MEAL NOT FOUND</div>
+  <NotFound v-else>MEAL</NotFound>
 </template>
 
 <script setup lang="ts">
@@ -64,6 +64,8 @@ import { useRoute } from "vue-router";
 
 import { useStore } from "../store";
 import ButtonYT from "../components/ButtonYT.vue";
+import Loading from "../components/Loading.vue";
+import NotFound from "../components/NotFound.vue";
 import axiosClient from "../axiosClient";
 import { Meal } from "../store/types";
 import { getParas } from "../utils";

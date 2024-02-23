@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.loading">LOADING AREAS...</div>
+  <Loading v-if="data.loading">AREAS</Loading>
   <div v-else>
     <div
       v-if="data.list?.length"
@@ -27,7 +27,7 @@
         </router-link>
       </div>
     </div>
-    <div v-else>NO AREAS FOUND</div>
+    <NotFound v-else>AREAS</NotFound>
   </div>
 </template>
 
@@ -35,6 +35,8 @@
 import { computed, ref, onMounted } from "vue";
 import { useStore } from "../store";
 import { Area, Areas } from "../store/types";
+import Loading from "../components/Loading.vue";
+import NotFound from "../components/NotFound.vue";
 
 const store = useStore();
 const data = ref<Areas>(store.state.areas);

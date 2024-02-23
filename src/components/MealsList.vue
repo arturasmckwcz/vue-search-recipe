@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.loading">LOADING MEALS...</div>
+  <Loading v-if="data.loading" />
   <div v-else>
     <div
       v-if="data.list?.length"
@@ -7,13 +7,15 @@
     >
       <MealCard v-for="meal of data.list" :key="meal.idMeal" :meal="meal" />
     </div>
-    <div v-else>NO MEALS FOUND</div>
+    <NotFound v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 import MealCard from "../components/MealCard.vue";
 import { SearchedMeals } from "../store/types";
+import Loading from "./Loading.vue";
+import NotFound from "./NotFound.vue";
 
 const data = defineProps<Partial<SearchedMeals>>();
 </script>

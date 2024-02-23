@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.loading">LOADING INGREDIENTS...</div>
+  <Loading v-if="data.loading">INGREDIENTS</Loading>
   <div v-else>
     <div
       v-if="data.list?.length"
@@ -28,7 +28,7 @@
         </router-link>
       </div>
     </div>
-    <div v-else>NO INGREDIENTS FOUND</div>
+    <NotFound v-else>INGREDIENTS</NotFound>
   </div>
 </template>
 
@@ -36,6 +36,8 @@
 import { computed, ref, onMounted } from "vue";
 import { useStore } from "../store";
 import { Ingredient, Ingredients } from "../store/types";
+import Loading from "../components/Loading.vue";
+import NotFound from "../components/NotFound.vue";
 
 const store = useStore();
 const data = ref<Ingredients>(store.state.ingredients);
