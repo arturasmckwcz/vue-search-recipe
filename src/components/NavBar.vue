@@ -5,7 +5,9 @@
         <img src="../assets/the-meal-db-logo-small.png" alt="meal-db-logo" />
       </a>
     </div>
-    <nav class="bg-white shadow-md h-16 flex justify-between items-center px-4">
+    <nav
+      class="bg-white shadow-md h-16 rounded flex justify-between items-center px-4"
+    >
       <router-link
         :to="{ name: 'home' }"
         class="px-2 transition-colors hover:text-blue-600"
