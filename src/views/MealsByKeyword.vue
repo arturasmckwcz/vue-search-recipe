@@ -1,7 +1,7 @@
 <template>
   <div class="my-5 flex flex-col">
     <input
-      class="shadow-md rounded"
+      class="shadow-md rounded placeholder:pl-3"
       v-model="keyword"
       @change="searchMeals"
       placeholder="Search meals"
