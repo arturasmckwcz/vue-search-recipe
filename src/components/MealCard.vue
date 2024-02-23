@@ -30,7 +30,7 @@ const { meal } = defineProps({
   meal: Object,
 }) as { meal: Meal };
 
-const maxLength = 19;
+const maxLength = 18;
 const truncated = computed(() =>
   meal.strMeal.length > maxLength ? getTruncated(meal.strMeal, maxLength) : null
 );
