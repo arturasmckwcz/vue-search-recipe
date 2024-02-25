@@ -3,7 +3,7 @@
   <div v-else>
     <div
       v-if="data.list?.length"
-      class="flex flex-col gap-5 mx-auto p-8 max-w-[65ch]"
+      class="flex flex-col gap-5 mx-auto px-8 max-w-[65ch]"
     >
       <input
         class="rounded shadow-md"

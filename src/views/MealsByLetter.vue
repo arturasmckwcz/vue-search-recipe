@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center gap-3 mt-5 py-2 bg-white shadow-md">
+  <div class="flex justify-center gap-3 py-2 bg-white shadow-md">
     <router-link
       class="hover:text-blue-600 hover:font-bold"
       :to="{ name: 'byLetter', params: { letter } }"

@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 bg-gray-100">
+  <header class="sticky top-0 pb-5 bg-gray-100">
     <div class="py-2">
       <a href="https://www.themealdb.com/" target="_blank">
         <img src="../assets/the-meal-db-logo-small.png" alt="meal-db-logo" />
@@ -33,12 +33,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import MenuBar from "./MenuBar.vue";
-import { onMounted } from "vue";
 
 const showMenuBar = ref(false);
-
-onMounted(() => {
-  console.log("DEBUG:onMounted:showMenuBar:", showMenuBar.value);
-  window.addEventListener;
-});
 </script>
