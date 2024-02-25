@@ -9,6 +9,7 @@ import Areas from "../views/Areas.vue";
 import Categories from "../views/Categories.vue";
 import Ingredients from "../views/Ingredients.vue";
 import MealsByACI from "../views/MealsByACI.vue";
+import Page404 from "../views/Page404.vue";
 
 const base = import.meta.env.VITE_FE_BASE || "/";
 const routes: RouteRecordRaw[] = [
@@ -37,7 +38,7 @@ const routes: RouteRecordRaw[] = [
         component: Categories,
       },
       {
-        path: base + "base+/ingredients",
+        path: base + "ingredients",
         name: "ingredients",
         component: Ingredients,
       },
@@ -51,6 +52,7 @@ const routes: RouteRecordRaw[] = [
         name: "byLetter",
         component: MealsByLetter,
       },
+      { path: "/:pathMatch(.*)*", name: "404", component: Page404 },
     ],
   },
   { path: base + "guest", component: GuestLayout },
