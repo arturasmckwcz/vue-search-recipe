@@ -2,7 +2,7 @@
   <Loading v-if="loading">MEAL DETAILS</Loading>
   <div
     v-else-if="meal"
-    class="flex flex-col max-w-[72ch] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
+    class="flex flex-col gap-3 max-w-[72ch] mx-auto mt-5 p-16 bg-white shadow-lg rounded-lg"
   >
     <a :href="meal.strSource" target="_blanc">
       <h1
