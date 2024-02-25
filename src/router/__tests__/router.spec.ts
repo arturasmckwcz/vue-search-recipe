@@ -4,8 +4,12 @@ import router from "../index"; // Import your router instance
 describe("router", () => {
   describe("resolution of paths", () => {
     it("resolves the home route", () => {
-      expect(router.resolve({ path: "/" }).fullPath).toBe("/");
+      const resolved = router.resolve({ path: "/" });
+
+      expect(resolved.fullPath).toBe("/");
+      expect(resolved.name).toBe("home");
     });
+
     it("resolves the mealDetails route with ID", () => {
       const resolved = router.resolve({ path: "/meal/123" });
 
