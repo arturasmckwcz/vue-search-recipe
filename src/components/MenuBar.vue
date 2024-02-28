@@ -1,14 +1,32 @@
 <template>
   <div>
-    <router-link :to="{ name: 'areas' }" :class="strClass"> Areas </router-link>
-    <router-link :to="{ name: 'categories' }" :class="strClass">
-      Categories
+    <router-link
+      data-test="menubar-areas"
+      :to="{ name: 'areas' }"
+      :class="strClass"
+    >
+      <span>Areas</span>
     </router-link>
-    <router-link :to="{ name: 'ingredients' }" :class="strClass">
-      Ingredients
+    <router-link
+      data-test="menubar-categories"
+      :to="{ name: 'categories' }"
+      :class="strClass"
+    >
+      <span>Categories</span>
     </router-link>
-    <router-link :to="{ name: 'byLetter' }" :class="strClass">
-      Meals By Letter
+    <router-link
+      data-test="menubar-ingredients"
+      :to="{ name: 'ingredients' }"
+      :class="strClass"
+    >
+      <span>Ingredients</span>
+    </router-link>
+    <router-link
+      data-test="menubar-byLetter"
+      :to="{ name: 'byLetter' }"
+      :class="strClass"
+    >
+      <span>Meals By Letter</span>
     </router-link>
   </div>
 </template>
